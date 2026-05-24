@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Trung Tâm Tiếng Trung Khánh Linh</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── CSS VARIABLES ────────────────────────────────────────────── */
+:root {
+  --color-primary:        #1C5070;
+  --color-primary-mid:    #2E86AB;
+  --color-primary-light:  #48C5C0;
+  --color-secondary:      #F4A261;
+  --color-accent:         #7C6FCD;
+  --color-dark-navy:      #0A2540;
+  --color-text-primary:   #1A1A2E;
+  --color-text-secondary: #6B8A99;
+  --color-text-muted:     #8AABB8;
+  --color-bg:             #FFFFFF;
+  --color-bg-soft:        #EEF7FC;
+  --color-bg-page:        #F5F8FB;
+  --color-border:         rgba(28,80,112,0.10);
+  --color-border-soft:    rgba(28,80,112,0.07);
+  --color-success:        #16A34A;
+  --color-warning:        #F59E0B;
+  --gradient-teal:        linear-gradient(135deg, #1C5070, #2E86AB, #48C5C0);
+  --gradient-hero:        linear-gradient(135deg, #1C5070, #2E86AB);
+  --gradient-page:        linear-gradient(145deg, #EEF7FC, #F5F8FB, #EAF0F8);
+  --gradient-dark:        linear-gradient(135deg, #0A2540, #1C5070, #4A3D8F);
+  --font-heading:         'Be Vietnam Pro', sans-serif;
+  --font-body:            'Be Vietnam Pro', sans-serif;
+  --font-chinese:         'Noto Sans SC', sans-serif;
+  --glass-bg:             rgba(255,255,255,0.82);
+  --glass-blur:           blur(16px);
+  --glass-border:         1px solid rgba(28,80,112,0.10);
+  --glass-radius:         14px;
+}
+
+/* ── RESET & BASE ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--gradient-page);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  padding: 0 0 80px;
+}
+
+/* ── LAYOUT ───────────────────────────────────────────────────── */
+.container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+.section { margin-bottom: 64px; }
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── HEADER ───────────────────────────────────────────────────── */
+.site-header {
+  background: var(--gradient-hero);
+  padding: 48px 32px 40px;
+  margin-bottom: 56px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '漢';
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-chinese);
+  font-size: 160px;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+.header-inner { max-width: 960px; margin: 0 auto; }
+.header-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 10px;
+}
+.header-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.header-subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+.header-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.header-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ── COLOR SWATCHES ───────────────────────────────────────────── */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.color-swatch {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+.swatch-color { height: 64px; width: 100%; }
+.swatch-info { padding: 10px 12px; }
+.swatch-name { font-size: 11px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+.swatch-hex  { font-size: 10px; font-family: 'Courier New', monospace; color: var(--color-text-muted); margin-bottom: 4px; }
+.swatch-use  { font-size: 10px; color: var(--color-text-secondary); line-height: 1.4; }
+
+.color-group-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 24px 0 10px;
+}
+
+/* ── GRADIENT CARDS ───────────────────────────────────────────── */
+.gradient-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.gradient-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+.gradient-preview { height: 80px; }
+.gradient-info { background: var(--color-bg); padding: 12px 14px; }
+.gradient-name { font-size: 12px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 3px; }
+.gradient-value { font-size: 10px; font-family: 'Courier New', monospace; color: var(--color-text-muted); line-height: 1.5; }
+
+/* ── TYPOGRAPHY ───────────────────────────────────────────────── */
+.type-sample {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+.type-meta { min-width: 100px; flex-shrink: 0; }
+.type-token { font-size: 10px; font-family: 'Courier New', monospace; color: var(--color-primary); font-weight: 600; display: block; margin-bottom: 2px; }
+.type-spec  { font-size: 10px; color: var(--color-text-muted); }
+.type-text  { color: var(--color-text-primary); line-height: 1.2; }
+
+.font-h1   { font-size: 48px; font-weight: 700; }
+.font-h2   { font-size: 36px; font-weight: 700; }
+.font-h3   { font-size: 28px; font-weight: 600; }
+.font-h4   { font-size: 20px; font-weight: 600; }
+.font-body { font-size: 16px; font-weight: 400; line-height: 1.6; }
+.font-small{ font-size: 14px; font-weight: 400; }
+.font-tiny { font-size: 12px; font-weight: 400; color: var(--color-text-secondary); }
+
+.weight-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.weight-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.weight-sample { font-size: 22px; color: var(--color-text-primary); margin-bottom: 6px; display: block; }
+.weight-label  { font-size: 10px; color: var(--color-text-muted); }
+
+.chinese-demo {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 10px;
+}
+.chinese-text {
+  font-family: var(--font-chinese);
+  font-size: 28px;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.chinese-label { font-size: 11px; color: var(--color-text-muted); }
+
+/* ── SPACING ──────────────────────────────────────────────────── */
+.spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+.spacing-bar { background: var(--color-primary-light); border-radius: 3px; height: 20px; flex-shrink: 0; }
+.spacing-token { font-size: 11px; font-family: 'Courier New', monospace; color: var(--color-primary); min-width: 90px; font-weight: 600; }
+.spacing-value { font-size: 11px; color: var(--color-text-secondary); }
+
+/* ── COMPONENTS ───────────────────────────────────────────────── */
+.component-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
+.component-label { font-size: 11px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 10px; }
+
+/* Buttons */
+.btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+.btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-mid     { background: var(--color-primary-mid); color: #fff; }
+.btn-secondary { background: transparent; color: var(--color-primary); border: 1.5px solid var(--color-primary); }
+.btn-ghost   { background: var(--color-bg-soft); color: var(--color-primary); }
+.btn-cta     { background: var(--color-secondary); color: #fff; }
+.btn-sm      { font-size: 11px; padding: 7px 16px; border-radius: 6px; }
+.btn-lg      { font-size: 15px; padding: 13px 28px; border-radius: 10px; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.badge-primary  { background: rgba(28,80,112,0.10); color: var(--color-primary); }
+.badge-mid      { background: rgba(46,134,171,0.12); color: var(--color-primary-mid); }
+.badge-light    { background: rgba(72,197,192,0.12); color: #0E8A85; }
+.badge-amber    { background: rgba(244,162,97,0.14); color: #A0522D; }
+.badge-accent   { background: rgba(124,111,205,0.12); color: var(--color-accent); }
+.badge-success  { background: rgba(22,163,74,0.10); color: var(--color-success); }
+.badge-warning  { background: rgba(245,158,11,0.12); color: #92400e; }
+.badge-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; display: inline-block; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+.card-base {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px;
+}
+.card-soft {
+  background: var(--color-bg-soft);
+  border: 1px solid rgba(28,80,112,0.08);
+  border-radius: 14px;
+  padding: 20px;
+}
+.card-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--glass-radius);
+  padding: 20px;
+}
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-chinese);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.card-icon-teal    { background: rgba(28,80,112,0.08); color: var(--color-primary); }
+.card-icon-mid     { background: rgba(46,134,171,0.10); color: var(--color-primary-mid); }
+.card-icon-light   { background: rgba(72,197,192,0.10); color: #0E8A85; }
+.card-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+.card-body  { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+
+/* Glass demo section */
+.glass-demo {
+  background: var(--gradient-dark);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.glass-demo::before {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(72,197,192,0.15);
+  top: -60px; right: 40px;
+  filter: blur(50px); pointer-events: none;
+}
+.glass-demo::after {
+  content: '';
+  position: absolute;
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  background: rgba(124,111,205,0.2);
+  bottom: 20px; left: -20px;
+  filter: blur(40px); pointer-events: none;
+}
+.glass-card-demo {
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative; z-index: 1;
+}
+.glass-label-dark  { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45); margin-bottom: 4px; }
+.glass-value-dark  { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.glass-sub-dark    { font-size: 11px; color: rgba(255,255,255,0.5); }
+.glass-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+/* Nav demo */
+.nav-demo {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(28,80,112,0.10);
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; }
+.nav-logo-icon {
+  width: 30px; height: 30px;
+  background: var(--gradient-hero);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-chinese);
+  font-size: 15px; color: #fff; font-weight: 700;
+}
+.nav-brand { font-size: 13px; font-weight: 700; color: var(--color-primary); }
+.nav-links { display: flex; gap: 20px; }
+.nav-link  { font-size: 12px; color: var(--color-text-secondary); text-decoration: none; }
+.nav-cta   { font-size: 11px; font-weight: 600; background: var(--color-primary); color: #fff; padding: 6px 14px; border-radius: 6px; border: none; cursor: pointer; }
+
+/* Stats strip */
+.stats-strip {
+  display: flex;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+.stat-item {
+  flex: 1;
+  padding: 16px;
+  text-align: center;
+  border-right: 1px solid var(--color-border-soft);
+}
+.stat-item:last-child { border-right: none; }
+.stat-value { font-size: 22px; font-weight: 700; color: var(--color-primary); margin-bottom: 3px; }
+.stat-label { font-size: 10px; color: var(--color-text-muted); }
+
+/* Section nav */
+.toc {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 48px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.toc-item {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary-mid);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid rgba(46,134,171,0.2);
+  background: rgba(46,134,171,0.05);
+  transition: background 0.15s;
+}
+.toc-item:hover { background: rgba(28,80,112,0.08); }
+
+/* Divider with label */
+.divider-label {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+}
+.divider-label::before, .divider-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--color-border);
+}
+.divider-text { font-size: 10px; font-weight: 600; color: var(--color-text-muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="header-inner">
+    <p class="header-eyebrow">Trung Tâm Tiếng Trung Khánh Linh</p>
+    <h1 class="header-title">Design System</h1>
+    <p class="header-subtitle">Soft Glass Light · Be Vietnam Pro · v1.0 · 2026-05-23</p>
+    <div class="header-tags">
+      <span class="header-tag">Primary #1C5070</span>
+      <span class="header-tag">Be Vietnam Pro</span>
+      <span class="header-tag">Soft Glass Light</span>
+      <span class="header-tag">Noto Sans SC</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <a class="toc-item" href="#colors">Màu sắc</a>
+    <a class="toc-item" href="#gradients">Gradient</a>
+    <a class="toc-item" href="#typography">Typography</a>
+    <a class="toc-item" href="#spacing">Spacing</a>
+    <a class="toc-item" href="#buttons">Button</a>
+    <a class="toc-item" href="#badges">Badge</a>
+    <a class="toc-item" href="#cards">Card</a>
+    <a class="toc-item" href="#glass">Glass Effect</a>
+    <a class="toc-item" href="#nav">Nav & Stats</a>
+  </nav>
+
+  <!-- ── 1. COLORS ─────────────────────────────────────────────── -->
+  <section class="section" id="colors">
+    <p class="section-title">01 · Màu sắc</p>
+
+    <p class="color-group-title">Brand Colors</p>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#1C5070;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep Teal</div>
+          <div class="swatch-hex">--color-primary · #1C5070</div>
+          <div class="swatch-use">Logo, CTA, heading chính</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#2E86AB;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ocean Blue</div>
+          <div class="swatch-hex">--color-primary-mid · #2E86AB</div>
+          <div class="swatch-use">Gradient mid, hover, link</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#48C5C0;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cyan Mint</div>
+          <div class="swatch-hex">--color-primary-light · #48C5C0</div>
+          <div class="swatch-use">Icon, badge, tag tích cực</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#F4A261;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Amber</div>
+          <div class="swatch-hex">--color-secondary · #F4A261</div>
+          <div class="swatch-use">CTA nổi bật, sale badge</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#7C6FCD;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Lavender</div>
+          <div class="swatch-hex">--color-accent · #7C6FCD</div>
+          <div class="swatch-use">Gradient pair, tag đặc biệt</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#0A2540;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep Navy</div>
+          <div class="swatch-hex">--color-dark-navy · #0A2540</div>
+          <div class="swatch-use">Dark section, footer</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="color-group-title" style="margin-top:24px;">Text & Background</p>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#1A1A2E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text Primary</div>
+          <div class="swatch-hex">--color-text-primary · #1A1A2E</div>
+          <div class="swatch-use">Heading, body text</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#6B8A99;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text Secondary</div>
+          <div class="swatch-hex">--color-text-secondary · #6B8A99</div>
+          <div class="swatch-use">Caption, meta</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#8AABB8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text Muted</div>
+          <div class="swatch-hex">--color-text-muted · #8AABB8</div>
+          <div class="swatch-use">Label phụ, placeholder</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#EEF7FC; border:1px solid #dde;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">BG Soft</div>
+          <div class="swatch-hex">--color-bg-soft · #EEF7FC</div>
+          <div class="swatch-use">Section nền xen kẽ</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#F5F8FB; border:1px solid #dde;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">BG Page</div>
+          <div class="swatch-hex">--color-bg-page · #F5F8FB</div>
+          <div class="swatch-use">Nền trang</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="color-group-title" style="margin-top:24px;">Trạng thái</p>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#16A34A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Success</div>
+          <div class="swatch-hex">--color-success · #16A34A</div>
+          <div class="swatch-use">Check, KPI đạt</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#F59E0B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warning</div>
+          <div class="swatch-hex">--color-warning · #F59E0B</div>
+          <div class="swatch-use">Note, deadline</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. GRADIENTS ───────────────────────────────────────────── -->
+  <section class="section" id="gradients">
+    <p class="section-title">02 · Gradient Presets</p>
+    <div class="gradient-grid">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg,#1C5070,#2E86AB,#48C5C0);"></div>
+        <div class="gradient-info">
+          <div class="gradient-name">gradient-teal</div>
+          <div class="gradient-value">linear-gradient(135deg, #1C5070, #2E86AB, #48C5C0)<br>Background section chính</div>
+        </div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg,#1C5070,#2E86AB);"></div>
+        <div class="gradient-info">
+          <div class="gradient-name">gradient-hero</div>
+          <div class="gradient-value">linear-gradient(135deg, #1C5070, #2E86AB)<br>CTA banner, header, logo bg</div>
+        </div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(145deg,#EEF7FC,#F5F8FB,#EAF0F8);"></div>
+        <div class="gradient-info">
+          <div class="gradient-name">gradient-page</div>
+          <div class="gradient-value">linear-gradient(145deg, #EEF7FC, #F5F8FB, #EAF0F8)<br>Nền trang — Soft Glass Light</div>
+        </div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg,#0A2540,#1C5070,#4A3D8F);"></div>
+        <div class="gradient-info">
+          <div class="gradient-name">gradient-dark</div>
+          <div class="gradient-value">linear-gradient(135deg, #0A2540, #1C5070, #4A3D8F)<br>Dark section, glassmorphism bg</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. TYPOGRAPHY ──────────────────────────────────────────── -->
+  <section class="section" id="typography">
+    <p class="section-title">03 · Typography — Be Vietnam Pro</p>
+
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-h1</span>
+        <span class="type-spec">48px · 700</span>
+      </div>
+      <div class="type-text font-h1">Tiếng Trung</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-h2</span>
+        <span class="type-spec">36px · 700</span>
+      </div>
+      <div class="type-text font-h2">Lộ trình học tập</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-h3</span>
+        <span class="type-spec">28px · 600</span>
+      </div>
+      <div class="type-text font-h3">HSK 1 đến HSK 6</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-h4</span>
+        <span class="type-spec">20px · 600</span>
+      </div>
+      <div class="type-text font-h4">Giảng viên bản ngữ</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-body</span>
+        <span class="type-spec">16px · 400 · lh 1.6</span>
+      </div>
+      <div class="type-text font-body">Phương pháp 联想记忆 giúp bạn ghi nhớ từ vựng lâu hơn 5 lần so với học truyền thống. Lộ trình được cá nhân hóa theo từng mục tiêu.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-small</span>
+        <span class="type-spec">14px · 400</span>
+      </div>
+      <div class="type-text font-small">Khai giảng ngày 15/06/2026 · Còn 12 suất học bổng</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-token">--text-tiny</span>
+        <span class="type-spec">12px · 400</span>
+      </div>
+      <div class="type-text font-tiny">* Học phí có thể điều chỉnh theo từng giai đoạn. Vui lòng liên hệ để được tư vấn.</div>
+    </div>
+
+    <p class="color-group-title" style="margin-top:24px;">Font Weights</p>
+    <div class="weight-grid">
+      <div class="weight-card">
+        <span class="weight-sample" style="font-weight:400;">Học</span>
+        <span class="weight-label">Regular · 400</span>
+      </div>
+      <div class="weight-card">
+        <span class="weight-sample" style="font-weight:500;">Học</span>
+        <span class="weight-label">Medium · 500</span>
+      </div>
+      <div class="weight-card">
+        <span class="weight-sample" style="font-weight:600;">Học</span>
+        <span class="weight-label">Semibold · 600</span>
+      </div>
+      <div class="weight-card">
+        <span class="weight-sample" style="font-weight:700;">Học</span>
+        <span class="weight-label">Bold · 700</span>
+      </div>
+    </div>
+
+    <p class="color-group-title" style="margin-top:24px;">Hán tự — Noto Sans SC</p>
+    <div class="chinese-demo">
+      <div class="chinese-text">漢語學習 · 你好世界 · 中文教育</div>
+      <div class="chinese-label">font-family: 'Noto Sans SC' — dùng xen kẽ trong nội dung và trang trí</div>
+    </div>
+  </section>
+
+  <!-- ── 4. SPACING ─────────────────────────────────────────────── -->
+  <section class="section" id="spacing">
+    <p class="section-title">04 · Spacing Scale (4px base)</p>
+    <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 24px;">
+      <div class="spacing-row"><span class="spacing-token">--space-1</span><div class="spacing-bar" style="width:4px;"></div><span class="spacing-value">4px</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-2</span><div class="spacing-bar" style="width:8px;"></div><span class="spacing-value">8px</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-3</span><div class="spacing-bar" style="width:12px;"></div><span class="spacing-value">12px</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-4</span><div class="spacing-bar" style="width:16px;"></div><span class="spacing-value">16px</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-6</span><div class="spacing-bar" style="width:24px;"></div><span class="spacing-value">24px · gap giữa elements</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-8</span><div class="spacing-bar" style="width:32px;"></div><span class="spacing-value">32px</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-12</span><div class="spacing-bar" style="width:48px;"></div><span class="spacing-value">48px</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-16</span><div class="spacing-bar" style="width:64px;"></div><span class="spacing-value">64px · padding section</span></div>
+      <div class="spacing-row"><span class="spacing-token">--space-24</span><div class="spacing-bar" style="width:96px;"></div><span class="spacing-value">96px</span></div>
+    </div>
+  </section>
+
+  <!-- ── 5. BUTTONS ─────────────────────────────────────────────── -->
+  <section class="section" id="buttons">
+    <p class="section-title">05 · Buttons</p>
+
+    <p class="component-label">Variants</p>
+    <div class="component-row">
+      <button class="btn btn-primary">Đăng ký ngay</button>
+      <button class="btn btn-mid">Xem lộ trình</button>
+      <button class="btn btn-secondary">Tìm hiểu thêm</button>
+      <button class="btn btn-ghost">Học thử miễn phí</button>
+      <button class="btn btn-cta">Nhận ưu đãi →</button>
+    </div>
+
+    <p class="component-label">Sizes</p>
+    <div class="component-row" style="align-items:center;">
+      <button class="btn btn-primary btn-sm">Nhỏ (sm)</button>
+      <button class="btn btn-primary">Mặc định</button>
+      <button class="btn btn-primary btn-lg">Lớn (lg)</button>
+    </div>
+
+    <p class="component-label">Trên nền tối</p>
+    <div style="background: var(--gradient-hero); border-radius: 12px; padding: 20px;">
+      <div class="component-row">
+        <button class="btn" style="background:#F4A261;color:#fff;">Đăng ký ngay →</button>
+        <button class="btn" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);">Xem lộ trình</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. BADGES ──────────────────────────────────────────────── -->
+  <section class="section" id="badges">
+    <p class="section-title">06 · Badges & Tags</p>
+
+    <p class="component-label">Brand Badges</p>
+    <div class="component-row">
+      <span class="badge badge-primary badge-dot">Tuyển sinh</span>
+      <span class="badge badge-mid badge-dot">Đang học</span>
+      <span class="badge badge-light badge-dot">Khai giảng</span>
+      <span class="badge badge-amber">Hot</span>
+      <span class="badge badge-accent">Mới</span>
+      <span class="badge badge-success badge-dot">Đậu HSK</span>
+      <span class="badge badge-warning">Sắp đầy</span>
+    </div>
+
+    <p class="component-label" style="margin-top:16px;">Dùng trong context</p>
+    <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+      <span style="font-size:13px;font-weight:600;color:var(--color-text-primary);">HSK 1–2 Cấp tốc</span>
+      <span class="badge badge-amber">Hot</span>
+      <span class="badge badge-mid">8 tuần</span>
+      <span class="badge badge-light">Online</span>
+      <span class="badge badge-success badge-dot">12 suất còn lại</span>
+    </div>
+  </section>
+
+  <!-- ── 7. CARDS ───────────────────────────────────────────────── -->
+  <section class="section" id="cards">
+    <p class="section-title">07 · Cards</p>
+
+    <p class="component-label">Ba kiểu card</p>
+    <div class="card-grid">
+      <div class="card-base">
+        <div class="card-icon card-icon-teal">學</div>
+        <div class="card-title">Card Base</div>
+        <div class="card-body">Nền trắng, border nhẹ rgba(28,80,112,0.10). Dùng cho danh sách khóa học, thẻ thông tin.</div>
+      </div>
+      <div class="card-soft">
+        <div class="card-icon card-icon-mid">師</div>
+        <div class="card-title">Card Soft</div>
+        <div class="card-body">Nền EEF7FC, tạo nhịp section xen kẽ. Dùng cho feature highlight, testimonial.</div>
+      </div>
+      <div class="card-glass">
+        <div class="card-icon card-icon-light">考</div>
+        <div class="card-title">Card Glass</div>
+        <div class="card-body">rgba(255,255,255,0.82) + backdrop-filter. Dùng trên nền gradient hoặc ảnh nền.</div>
+      </div>
+    </div>
+
+    <p class="component-label" style="margin-top:24px;">Card khóa học</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+      <div class="card-base" style="padding:18px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <span class="badge badge-primary">HSK 1–2</span>
+          <span class="badge badge-amber">Hot</span>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:4px;">Tiếng Trung Cấp tốc</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.5;">Từ mất gốc đến giao tiếp cơ bản trong 8 tuần.</div>
+        <div style="border-top:1px solid var(--color-border-soft);padding-top:12px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:13px;font-weight:700;color:var(--color-primary);">1.2tr/tháng</span>
+          <button class="btn btn-primary btn-sm">Đăng ký</button>
+        </div>
+      </div>
+      <div class="card-base" style="padding:18px; border-color:rgba(46,134,171,0.25);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <span class="badge badge-mid">HSK 3–4</span>
+          <span class="badge badge-success badge-dot">Còn chỗ</span>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--color-primary-mid);margin-bottom:4px;">Tiếng Trung Thương mại</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.5;">Giao tiếp văn phòng, đọc email, họp nhóm.</div>
+        <div style="border-top:1px solid var(--color-border-soft);padding-top:12px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:13px;font-weight:700;color:var(--color-primary-mid);">1.5tr/tháng</span>
+          <button class="btn btn-sm" style="background:var(--color-primary-mid);color:#fff;border:none;">Đăng ký</button>
+        </div>
+      </div>
+      <div class="card-base" style="padding:18px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <span class="badge badge-accent">HSK 5–6</span>
+          <span class="badge badge-warning">Sắp đầy</span>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--color-accent);margin-bottom:4px;">Luyện thi HSK Chuyên sâu</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.5;">Đảm bảo đậu HSK 5–6, cam kết hoàn tiền.</div>
+        <div style="border-top:1px solid var(--color-border-soft);padding-top:12px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:13px;font-weight:700;color:var(--color-accent);">2.0tr/tháng</span>
+          <button class="btn btn-secondary btn-sm">Đăng ký</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. GLASS EFFECT ────────────────────────────────────────── -->
+  <section class="section" id="glass">
+    <p class="section-title">08 · Glass Effect — Dark Background</p>
+    <div class="glass-demo">
+      <div class="glass-grid">
+        <div class="glass-card-demo">
+          <div class="glass-label-dark">Học viên</div>
+          <div class="glass-value-dark">2,400+</div>
+          <div class="glass-sub-dark">đang theo học</div>
+        </div>
+        <div class="glass-card-demo">
+          <div class="glass-label-dark">Tỉ lệ đậu HSK</div>
+          <div class="glass-value-dark" style="color:#48C5C0;">94%</div>
+          <div class="glass-sub-dark">cam kết hoàn tiền</div>
+        </div>
+        <div class="glass-card-demo">
+          <div class="glass-label-dark">Giảng viên</div>
+          <div class="glass-value-dark" style="color:#B8AFFE;">6 GV</div>
+          <div class="glass-sub-dark">người bản ngữ</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;font-size:11px;color:rgba(255,255,255,0.5);font-style:italic;">
+        Spec: background rgba(255,255,255,0.10) · backdrop-filter blur(20px) · border rgba(255,255,255,0.15)
+      </div>
+    </div>
+
+    <p class="component-label" style="margin-top:20px;">Glass Effect — Light Background</p>
+    <div style="background: var(--gradient-page); border-radius: 16px; padding: 24px; border: 1px solid var(--color-border);">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+        <div class="card-glass">
+          <div class="card-icon card-icon-teal">學</div>
+          <div class="card-title">Học linh hoạt</div>
+          <div class="card-body">Online + offline, lịch học theo bạn.</div>
+        </div>
+        <div class="card-glass">
+          <div class="card-icon card-icon-mid">師</div>
+          <div class="card-title">Giáo viên bản ngữ</div>
+          <div class="card-body">6 giảng viên người Trung Quốc.</div>
+        </div>
+        <div class="card-glass">
+          <div class="card-icon card-icon-light">考</div>
+          <div class="card-title">Cam kết đậu HSK</div>
+          <div class="card-body">94% học viên thi đậu, hoàn tiền nếu không đạt.</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--color-text-muted);font-style:italic;text-align:center;">
+        Spec: background rgba(255,255,255,0.82) · backdrop-filter blur(16px) · border rgba(28,80,112,0.10)
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. NAV & STATS ─────────────────────────────────────────── -->
+  <section class="section" id="nav">
+    <p class="section-title">09 · Navigation & Stats Strip</p>
+
+    <p class="component-label">Nav — Glass Light</p>
+    <nav class="nav-demo">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">漢</div>
+        <div>
+          <div class="nav-brand">Khánh Linh</div>
+          <div style="font-size:9px;color:var(--color-text-muted);">Trung Tâm Tiếng Trung</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" href="#">Khóa học</a>
+        <a class="nav-link" href="#">Lộ trình</a>
+        <a class="nav-link" href="#">Giảng viên</a>
+        <a class="nav-link" href="#">Liên hệ</a>
+      </div>
+      <button class="nav-cta">Đăng ký ngay</button>
+    </nav>
+
+    <p class="component-label" style="margin-top:20px;">Stats Strip — Glass Light</p>
+    <div class="stats-strip">
+      <div class="stat-item">
+        <div class="stat-value">2,400+</div>
+        <div class="stat-label">Học viên</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color:var(--color-primary-mid);">94%</div>
+        <div class="stat-label">Thi đậu HSK</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color:#0E8A85;">8 tuần</div>
+        <div class="stat-label">Giao tiếp cơ bản</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">6 GV</div>
+        <div class="stat-label">Bản ngữ</div>
+      </div>
+    </div>
+
+    <p class="component-label" style="margin-top:20px;">CTA Banner</p>
+    <div style="background: var(--gradient-hero); border-radius: 14px; padding: 20px 28px; display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:4px;">Khai giảng ngày 15/06/2026</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;">Còn 12 suất học bổng 30% học phí</div>
+      </div>
+      <button class="btn btn-cta">Đăng ký ngay →</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div style="border-top:1px solid var(--color-border); padding-top:24px; text-align:center;">
+    <div style="font-size:11px; color:var(--color-text-muted);">
+      Design System v1.0 · Trung Tâm Tiếng Trung Khánh Linh · CITO Performance Marketing · 2026-05-23
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
